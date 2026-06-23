@@ -36,22 +36,22 @@ def handle_command_interrupt(message):
     if message.text and message.text.startswith('/'):
         command = message.text.split()[0].lower()
         if command == '/cancel':
-            bot.clear_step_handlers_by_chat_id(message.chat.id)
+            bot.clear_step_handler_by_chat_id(message.chat.id)
             clear_user_state(message.chat.id)
             bot.send_message(message.chat.id, "❌ Operation cancelled. You can start again with /createmessage.")
             return True
         elif command == '/start':
-            bot.clear_step_handlers_by_chat_id(message.chat.id)
+            bot.clear_step_handler_by_chat_id(message.chat.id)
             clear_user_state(message.chat.id)
             send_welcome(message)
             return True
         elif command == '/createmessage':
-            bot.clear_step_handlers_by_chat_id(message.chat.id)
+            bot.clear_step_handler_by_chat_id(message.chat.id)
             clear_user_state(message.chat.id)
             create_message(message)
             return True
         else:
-            bot.clear_step_handlers_by_chat_id(message.chat.id)
+            bot.clear_step_handler_by_chat_id(message.chat.id)
             clear_user_state(message.chat.id)
             bot.send_message(message.chat.id, "❌ Process aborted because a new command was entered. Use /createmessage to start over.")
             return True
@@ -71,14 +71,14 @@ def send_welcome(message):
 
 @bot.message_handler(commands=['cancel'])
 def cancel_command(message):
-    bot.clear_step_handlers_by_chat_id(message.chat.id)
+    bot.clear_step_handler_by_chat_id(message.chat.id)
     clear_user_state(message.chat.id)
     bot.send_message(message.chat.id, "❌ There is no active process to cancel.")
 
 
 @bot.message_handler(commands=['createmessage'])
 def create_message(message):
-    bot.clear_step_handlers_by_chat_id(message.chat.id)
+    bot.clear_step_handler_by_chat_id(message.chat.id)
     clear_user_state(message.chat.id)
     msg = bot.send_message(message.chat.id, "🎬 Enter the link of your movie / video:")
     bot.register_next_step_handler(msg, get_link)
