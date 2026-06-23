@@ -75,6 +75,7 @@ def procesing(message):
     lastname = message.from_user.last_name
     bot.send_message(message.chat.id, output_text)
     data_uploader.send_to_spreadsheet(lnk, lnk2, lnk1, nme, yer, rate, lang, qualty, str(now.date()), str(now.time()), firstname, lastname, message.chat.id)
+    myList.clear()
 
 
 
